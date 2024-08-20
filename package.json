@@ -1,19 +1,15 @@
 {
   "name": "my-node-app",
   "version": "1.0.0",
-  "description": "Learning purpose",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tapasmaity/node-app.git"
-  },
-  "author": "tapas",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tapasmaity/node-app/issues"
-  },
-  "homepage": "https://github.com/tapasmaity/node-app#readme"
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
