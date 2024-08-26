@@ -34,7 +34,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Welcome to docker initialize');
 });
 
 app.use("/api", require("./routes/sampleRoutes"));
