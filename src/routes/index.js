@@ -253,7 +253,65 @@ router.get('/posts/:id', postController.getPostById);
  *              description: Post not found.
  */
 router.post('/posts/:id', postController.createPost);
+
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *  put:
+ *      summary: Update post by ID
+ *      tags: [Posts]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            description: The post ID
+ *            schema:
+ *              type: string
+ *      requestBody:
+ *          description: Post object that needs to be added to the database
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Post'
+ *      responses:
+ *          200:
+ *              description: Single post
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Post'
+ *          400:
+ *              description: Post not found.
+ */
 router.put('/posts/:id', postController.updatePost);
+
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *  delete:
+ *      summary: Delete post by ID
+ *      tags: [Posts]
+ *      parameters:
+ *          - in: path
+ *            required: true
+ *            name: id
+ *            description: The post ID
+ *            schema:
+ *              type: string
+ *      responses:
+ *          200:
+ *              description: Post deleted successfuly
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/Post'
+ *          400:
+ *              description: Post not found
+ */
 router.delete('/posts/:id', postController.deletePost);
 
 module.exports = router;
