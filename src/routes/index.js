@@ -3,29 +3,44 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
 
-// User routes
+// All Schemas
 
 /**
  * @swagger
  * components:
- *   schemas:
- *     User:
- *       type: object
- *       required:
- *         - name
- *         - email
- *       properties:
- *         name:
- *           type: string
- *           description: The user's name.
- *         email:
- *           type: string
- *           description: The user's email.
- *       example:
- *         name: John Doe
- *         email: john@example.com
+ *  schemas:
+ *      User:
+ *          type: object
+ *          required:
+ *              - name
+ *              - email
+ *          properties:
+ *              name:
+ *                  type: string
+ *                  description: The user's name.
+ *              email:
+ *                  type: string
+ *                  description: The user's email.
+ *          example:
+ *              name: John Doe
+ *              email: john@example.com
+ *      Post:
+ *          type: object
+ *          required:
+ *              - title
+ *          properties:
+ *              title:
+ *                  type: string
+ *                  description: Enter your title.
+ *              content:
+ *                  type: string
+ *                  description: .
+ *          example:
+ *              title: Substitute Text
+ *              content: The quick brown fox jumps over the lazy dog, filling in for dummy text.
  */
 
+// User routes
 
 /**
  * @swagger
@@ -156,10 +171,88 @@ router.put('/users/:id', userController.updateUser);
  */
 router.delete('/users/:id', userController.deleteUser);
 
+
 // Post routes
+
+
+/**
+ * @swagger
+ * /api/posts:
+ *  get:
+ *      summary: Get all posts
+ *      tags: [Posts]
+ *      responses:
+ *          200:
+ *              description: A list of posts.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Post'
+ */
 router.get('/posts', postController.getAllPosts);
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *  get:
+ *      summary: Single post by ID
+ *      tags: [Posts]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            description: The Post ID
+ *            schema:
+ *              type: string
+ *      responses:
+ *          200:
+ *              description: Single post
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Post'
+ *          400:
+ *              description: Post not found.
+ */
 router.get('/posts/:id', postController.getPostById);
-router.post('/posts', postController.createPost);
+
+
+/**
+ * @swagger
+ * /api/posts/{id}:
+ *  post:
+ *      summary: Create post by user ID
+ *      tags: [Posts]
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            description: The user ID
+ *            schema:
+ *              type: string
+ *      requestBody:
+ *          description: Post object that needs to be added to the database
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Post'
+ *      responses:
+ *          200:
+ *              description: Single post
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Post'
+ *          400:
+ *              description: Post not found.
+ */
+router.post('/posts/:id', postController.createPost);
 router.put('/posts/:id', postController.updatePost);
 router.delete('/posts/:id', postController.deletePost);
 
