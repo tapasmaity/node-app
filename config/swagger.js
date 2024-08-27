@@ -1,6 +1,7 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
+
 // Start server
 const port = process.env.PORT || 3000;
 
@@ -28,7 +29,8 @@ const swaggerOptions = {
                 description: 'Development server',
             },
             {
-                url: 'http://localhost:8000'
+                url: 'http://localhost:8000',
+                description: 'Production server'
             }
         ],
         components: {
