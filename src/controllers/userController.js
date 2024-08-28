@@ -1,10 +1,12 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const someOtherPlaintextPassword = 'not_bacon';
 
 
-// Get all users
+/*
+* API
+* All users
+*/
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await User.find();
@@ -14,7 +16,10 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
-// Get a single user by ID
+/*
+* API
+* A single user by ID
+*/
 exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -26,7 +31,10 @@ exports.getUserById = async (req, res) => {
 };
 
 
-// Create a new user
+/*
+* API
+* Create a new user
+*/
 exports.createUser = async (req, res) => {
     try {
         const myPlaintextPassword = req.body.password;
@@ -53,7 +61,10 @@ exports.createUser = async (req, res) => {
 };
 
 
-// Update a user by ID
+/*
+* API
+* Update a user by ID
+*/
 exports.updateUser = async (req, res) => {
     try {
         const updateData = {
@@ -82,7 +93,10 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// Delete a user by ID
+/*
+* API
+* Delete a user by ID
+*/
 exports.deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id);
