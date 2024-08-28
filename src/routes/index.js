@@ -14,6 +14,8 @@ const postController = require('../controllers/postController');
  *          required:
  *              - name
  *              - email
+ *              - password
+ *              - userType
  *          properties:
  *              name:
  *                  type: string
@@ -21,9 +23,18 @@ const postController = require('../controllers/postController');
  *              email:
  *                  type: string
  *                  description: The user's email.
+ *                  uniqueItems: true
+ *              password:
+ *                  type: string
+ *                  description: The user's password.
+ *              userType:
+ *                  type: string
+ *                  description: Type of user.
  *          example:
- *              name: John Doe
+ *              name: John
  *              email: john@example.com
+ *              password: pass12345
+ *              userType: user
  *      Post:
  *          type: object
  *          required:

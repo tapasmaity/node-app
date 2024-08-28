@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const User = require('../models/user');
 
 /*
 * API
@@ -34,15 +35,16 @@ exports.getPostById = async (req, res) => {
 */
 exports.createPost = async (req, res) => {
     try {
+        const singleUser = await User.findById(req.params.id).select('-password -createdAt -updatedAt');
         const newPost = new Post({
-            userId: req.params.id,
             title: req.body.title,
             content: req.body.content,
+            user: singleUser,
         });
         const savedPost = await newPost.save();
         res.status(201).json(savedPost);
     } catch (ex) {
-        res.status(400).json({ message: 'Bad request' });
+        res.status(400).json({ message: 'User not found' })
     }
 };
 
