@@ -8,9 +8,11 @@ const postSchema = new mongoose.Schema({
     content: {
         type: String
     },
-    user:{
+    user: {
         type: Object
     }
+}, {
+    timestamps: true
 });
 
 const Post = mongoose.model('Posts', postSchema);
