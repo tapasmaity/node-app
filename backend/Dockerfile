@@ -2,6 +2,9 @@
 # The tag "lts" refers to the latest LTS (Long Term Support) version.
 FROM node:lts
 
+# Copy the package.json and package-lock.json
+COPY package*.json ./
+
 # Copy the rest of the application code to the working directory.
 COPY . .
 
