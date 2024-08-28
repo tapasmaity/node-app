@@ -2,12 +2,19 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
+const authController = require('../controllers/authController');
+const verifyToken = require('../middlewares/auth');
 
 // All Schemas
 
 /**
  * @swagger
  * components:
+ *  securitySchemes:
+ *      BearerAuth:
+ *          type: http
+ *          scheme: bearer
+ *          bearerFormat: JWT
  *  schemas:
  *      User:
  *          type: object
@@ -49,7 +56,54 @@ const postController = require('../controllers/postController');
  *          example:
  *              title: Substitute Text
  *              content: The quick brown fox jumps over the lazy dog, filling in for dummy text.
+ *      LoginResponse:
+ *          type: object
+ *          properties:
+ *              token:
+ *                  type: string
+ *                  description: JWT token for authentication.
+ *          example:
+ *              token: your_jwt_token_here
  */
+
+// User Authentication
+
+
+/**
+ * @swagger
+ * /api/login:
+ *  post:
+ *      summary: User login
+ *      tags: [Auth]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          email:
+ *                              type: string
+ *                              description: User's email address
+ *                              example: john@example.com
+ *                          password:
+ *                              type: string
+ *                              description: User's password
+ *                              example: pass12345
+ *      responses:
+ *          200:
+ *              description: JWT token returned upon successful login.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/LoginResponse'
+ *          400:
+ *              description: Invalid email or password.
+ *          404:
+ *              description: User not found.
+ */
+router.post('/login', authController.loginUser);
+
 
 // User routes
 
@@ -69,7 +123,7 @@ const postController = require('../controllers/postController');
  *               items:
  *                 $ref: '#/components/schemas/User'
  */
-router.get('/users', userController.getAllUsers);
+router.get('/users', verifyToken, userController.getAllUsers);
 
 
 /**
@@ -95,7 +149,7 @@ router.get('/users', userController.getAllUsers);
  *       404:
  *         description: User not found
  */
-router.get('/users/:id', userController.getUserById);
+router.get('/users/:id', verifyToken, userController.getUserById);
 
 /**
  * @swagger
@@ -155,7 +209,7 @@ router.post('/users', userController.createUser);
  *          404:
  *            description: User not found
  */
-router.put('/users/:id', userController.updateUser);
+router.put('/users/:id', verifyToken, userController.updateUser);
 
 /**
  * @swagger
@@ -180,7 +234,7 @@ router.put('/users/:id', userController.updateUser);
  *          400:
  *              description: User not found
  */
-router.delete('/users/:id', userController.deleteUser);
+router.delete('/users/:id', verifyToken, userController.deleteUser);
 
 
 // Post routes
@@ -202,7 +256,7 @@ router.delete('/users/:id', userController.deleteUser);
  *                          items:
  *                              $ref: '#/components/schemas/Post'
  */
-router.get('/posts', postController.getAllPosts);
+router.get('/posts', verifyToken, postController.getAllPosts);
 
 /**
  * @swagger
@@ -229,7 +283,7 @@ router.get('/posts', postController.getAllPosts);
  *          400:
  *              description: Post not found.
  */
-router.get('/posts/:id', postController.getPostById);
+router.get('/posts/:id', verifyToken, postController.getPostById);
 
 
 /**
@@ -263,7 +317,7 @@ router.get('/posts/:id', postController.getPostById);
  *          400:
  *              description: Post not found.
  */
-router.post('/posts/:id', postController.createPost);
+router.post('/posts/:id', verifyToken, postController.createPost);
 
 
 /**
@@ -297,7 +351,7 @@ router.post('/posts/:id', postController.createPost);
  *          400:
  *              description: Post not found.
  */
-router.put('/posts/:id', postController.updatePost);
+router.put('/posts/:id', verifyToken, postController.updatePost);
 
 
 /**
@@ -323,6 +377,6 @@ router.put('/posts/:id', postController.updatePost);
  *          400:
  *              description: Post not found
  */
-router.delete('/posts/:id', postController.deletePost);
+router.delete('/posts/:id', verifyToken, postController.deletePost);
 
 module.exports = router;
