@@ -27,6 +27,8 @@ exports.createUser = async (req, res) => {
         const newUser = new User({
             name: req.body.name,
             email: req.body.email,
+            password: req.body.password,
+            userType: req.body.userType,
         });
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
@@ -43,6 +45,8 @@ exports.updateUser = async (req, res) => {
             {
                 name: req.body.name,
                 email: req.body.email,
+                password: req.body.password,
+                userType: req.body.userType,
             },
             { new: true, runValidators: true }
         );
