@@ -42,11 +42,10 @@ function App() {
         </Routes>
         :
         <Routes>
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
           <Route path='*' element={<Navigate to="/" />} />
         </Routes>
       }
-      <h1>Hello</h1>
     </div>
   );
 }
