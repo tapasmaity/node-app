@@ -52,8 +52,7 @@ function Login(props) {
           }
         try {
             const log = await authLogin(data);
-            // localStorage.setItem('token', log.data.token);
-            console.log('22222222222222',log)
+            localStorage.setItem('token', log.data.token);
             ToastSuccess(`Login ${log.data.message}`)
             dispatch(loaderAction.loader(false));
             navigate('/home');
