@@ -5,7 +5,8 @@ import { ToastSuccess, ToastError } from '../../components/toast/ToastNotificati
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loaderAction } from '../../services/store/loader';
-function Login(props) {
+
+function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{1,4}$/i
@@ -35,7 +36,7 @@ function Login(props) {
         if (!regexEmail.test(email)) {
             checked = false;
         }
-        if (pswd.length < 6) {
+        if (pswd.length < process.env.REACT_APP_PASSWORD_LENGTH) {
             checked = false;
         }
         return checked;
@@ -55,7 +56,7 @@ function Login(props) {
             localStorage.setItem('token', log.data.token);
             ToastSuccess(`Login ${log.data.message}`)
             dispatch(loaderAction.loader(false));
-            navigate('/home');
+            navigate('/');
         } catch (error) {
             console.log(error)
             ToastError(error.response.data.message);
@@ -92,7 +93,7 @@ function Login(props) {
                         <label htmlFor="pwd">Password *</label>
                         <input
                             onChange={handleChangeEvent}
-                            style={inputData.isSubmitted && inputData.pswd.length < 6 ? { borderColor: "red" } : {}}
+                            style={inputData.isSubmitted && inputData.pswd.length < process.env.REACT_APP_PASSWORD_LENGTH ? { borderColor: "red" } : {}}
                             type="password"
                             className="form-input"
                             placeholder="Enter password"
