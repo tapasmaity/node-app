@@ -52,13 +52,14 @@ function Login(props) {
           }
         try {
             const log = await authLogin(data);
-            localStorage.setItem('token', log.data.token);
-            ToastSuccess('Login successfull')
+            // localStorage.setItem('token', log.data.token);
+            console.log('22222222222222',log)
+            ToastSuccess(`Login ${log.data.message}`)
             dispatch(loaderAction.loader(false));
             navigate('/home');
         } catch (error) {
-            // ToastError(error.response.data.email);
-            ToastError('User not found!');
+            console.log(error)
+            ToastError(error.response.data.message);
             dispatch(loaderAction.loader(false));
         }
     }
