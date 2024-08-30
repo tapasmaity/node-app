@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const postController = require('../controllers/postController');
 const authController = require('../controllers/authController');
+const uploadController = require('../controllers/uploadController');
 const verifyToken = require('../middlewares/auth');
 
 // All Schemas
@@ -378,5 +379,7 @@ router.put('/posts/:id', verifyToken, postController.updatePost);
  *              description: Post not found
  */
 router.delete('/posts/:id', verifyToken, postController.deletePost);
+
+router.post('/upload', uploadController.uploadFile);
 
 module.exports = router;
