@@ -380,6 +380,46 @@ router.put('/posts/:id', verifyToken, postController.updatePost);
  */
 router.delete('/posts/:id', verifyToken, postController.deletePost);
 
+/**
+ * @swagger
+ * /api/upload:
+ *   post:
+ *     summary: Upload file
+ *     tags: [Upload]
+ *     requestBody:
+ *       description: File that needs to be uploaded
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               file:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: File uploaded successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 filename:
+ *                   type: string
+ *                   description: Name of the uploaded file
+ *                 contentType:
+ *                   type: string
+ *                   description: MIME type of the uploaded file
+ *                 imageBase64:
+ *                   type: string
+ *                   description: Base64 string of the file data
+ *       400:
+ *         description: Bad request (e.g., invalid file or file type)
+ *       500:
+ *         description: Server error
+ */
 router.post('/upload', uploadController.uploadFile);
+
 
 module.exports = router;
