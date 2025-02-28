@@ -12,7 +12,6 @@ app.use(cors({
 }));
 // Middleware
 app.use(express.json());
-
 // Connect to the database
 connectDB();
 
@@ -23,7 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use('/api', routes);
 
 // Start server
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
