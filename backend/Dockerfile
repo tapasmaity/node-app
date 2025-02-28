@@ -1,7 +1,6 @@
 # Use the official Node.js image.
 # The tag "lts" refers to the latest LTS (Long Term Support) version.
-FROM node:lts
-
+FROM node:20
 # Copy the package.json and package-lock.json
 COPY package*.json ./
 
@@ -13,7 +12,7 @@ RUN npm install
 
 
 # Expose the port on which your app will run.
-EXPOSE 3000
+EXPOSE 5000
 
 # Command to run the application.
 CMD ["npm", "start"]

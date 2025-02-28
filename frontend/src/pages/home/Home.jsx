@@ -9,7 +9,7 @@ function Home() {
   return (
     <div className='m-5'>
       <h1>Welcome to Home</h1>
-      <button onClick={() => logOut()}>Log out</button>
+      <button className='btn btn-info text-white' onClick={() => logOut()}>Log out</button>
     </div>
   )
 }

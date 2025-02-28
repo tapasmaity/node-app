@@ -53,6 +53,7 @@ function Login() {
           }
         try {
             const log = await authLogin(data);
+            console.log("log", log);
             localStorage.setItem('token', log.data.token);
             ToastSuccess(`Login ${log.data.message}`)
             dispatch(loaderAction.loader(false));
