@@ -1,15 +1,23 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-const loaderSlice = createSlice({
-    name:'loader',
-    initialState:{loader:false},
-    reducers:{
-        loader(state, action){
+const appSlice = createSlice({
+    name: 'app',
+    initialState: {
+        loader: false,
+        usersList: [],
+    },
+    reducers: {
+        setLoader(state, action) {
             state.loader = action.payload;
-        }
-    }
-
+        },
+        setUsers(state, action) {
+            state.usersList = action.payload;
+        },
+    },
 });
 
-export const loaderAction = loaderSlice.actions;
-export default loaderSlice;
+// Actions
+export const { setLoader, setUsers } = appSlice.actions;
+
+// Reducer
+export default appSlice.reducer;

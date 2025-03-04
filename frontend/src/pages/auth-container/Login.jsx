@@ -4,7 +4,7 @@ import { authLogin } from '../../services/api/apiService';
 import { ToastSuccess, ToastError } from '../../components/toast/ToastNotification';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loaderAction } from '../../services/store/loader';
+import { setLoader } from '../../services/store/loader';
 
 function Login() {
     const navigate = useNavigate()
@@ -46,7 +46,7 @@ function Login() {
     * Login
     */
     const login = async () => {
-        dispatch(loaderAction.loader(true));
+        dispatch(setLoader(true));
         const data = {
             "email": inputData.email,
             "password": inputData.pswd
@@ -56,12 +56,12 @@ function Login() {
             console.log("log", log);
             localStorage.setItem('token', log.data.token);
             ToastSuccess(`Login ${log.data.message}`)
-            dispatch(loaderAction.loader(false));
+            dispatch(setLoader(false));
             navigate('/');
         } catch (error) {
             console.log(error)
             ToastError(error.response.data.message);
-            dispatch(loaderAction.loader(false));
+            dispatch(setLoader(false));
         }
     }
     /*
