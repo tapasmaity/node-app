@@ -8,7 +8,7 @@ import Login from './pages/auth-container/Login';
 
 function App() {
   const token = localStorage.getItem('token');
-  const loader = useSelector((state) => state.loader.loader);
+  const loader = useSelector((state) => state.app.loader);
 
   return (
     <div>
