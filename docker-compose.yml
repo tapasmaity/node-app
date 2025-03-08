@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.2'
 services:
   backend:
     build: ./backend
@@ -10,12 +10,23 @@ services:
     volumes:
       - ./backend/src:/app/src
 
-  frontend:
-    build: ./frontend
+  # frontend:
+  #   build: ./frontend
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - ./frontend/src:/app/src
+  #     - ./frontend/public:/app/public
+  #   depends_on:
+  #     - backend
+
+  web:
+    build: ./react-app
     ports:
-      - '3000:3000'
+    - "5173:5173"  # Use Vite's default port
     volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
+      - ./react-app:/app  # ✅ Mount react-app instead of the full project
+      - /app/node_modules  # ✅ Avoid overwriting node_modules
+    command: ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
     depends_on:
       - backend
