@@ -12,6 +12,7 @@ function Login() {
 
   const login = () => {
     alert(inputData.emial, inputData.password);
+    console.log("first")
   }
   return (
     <div className="h-[100vh] w-[100vw] flex justify-center items-center bg-gray-100">
