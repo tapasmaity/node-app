@@ -3,6 +3,10 @@ import api from './index';
 /**
 * Auth section
 */
-export const login = (dataBody) => {
+const login = (dataBody) => {
     return api.post('/login', dataBody);
+}
+
+export {
+    login
 }

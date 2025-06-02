@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
+import { login } from "../../servies/api/api-service"
 
 function Login() {
   const [inputData, setInputData] = useState({
@@ -10,9 +11,13 @@ function Login() {
     password: ""
   })
 
-  const login = () => {
-    alert(inputData.emial, inputData.password);
-    console.log("first")
+  const submitted = async () => {
+   const data = {
+      "email": inputData.emial,
+      "password": inputData.password
+    }
+    const log = await login(data);
+    console.log("first", log)
   }
   return (
     <div className="h-[100vh] w-[100vw] flex justify-center items-center bg-gray-100">
@@ -37,7 +42,7 @@ function Login() {
           />
         </div>
         <p className="text-xs text-blue-400 mb-3 text-right cursor-pointer">Forget password?</p>
-        <Button className='w-full mb-3' onClick={() => login()}>Submit</Button>
+        <Button className='w-full mb-3' onClick={() => submitted()}>Submit</Button>
         <p className="text-xs mb-3">
           Have an account?
           <Link to="#" className='text-blue-400'> Sign in</Link>
