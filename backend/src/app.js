@@ -6,9 +6,9 @@ require('dotenv').config();
 const cors = require('cors');
 const app = express();
 
-// Enable CORS for requests from 'http://localhost:3000'
+// Enable CORS for requests from 'http://localhost:5173'
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'http://localhost:5173'
 }));
 // Middleware
 app.use(express.json());
