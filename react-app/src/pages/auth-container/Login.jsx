@@ -38,7 +38,7 @@ function Login() {
         <p className="text-xs text-blue-400 mb-3 text-right cursor-pointer">Forget password?</p>
         <Button className='w-full mb-3' onClick={() => login()}>Submit</Button>
         <p className="text-xs mb-3">
-          have an account?
+          I have an account?
           <Link to="#" className='text-blue-400'> Sign in</Link>
         </p>
       </div>
